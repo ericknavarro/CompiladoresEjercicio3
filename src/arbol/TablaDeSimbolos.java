@@ -1,0 +1,87 @@
+/*
+ * Ejemplo desarrollado por Erick Navarro
+ * Blog: e-navarro.blogspot.com
+ * Julio - 2018
+ */
+package arbol;
+
+import java.util.LinkedList;
+
+/**
+ * Clase tabla de símbolos, que realiza todas las operaciones habituales de una 
+ * tabla de símbolos, hereda de la clase lista enlazada porque básicamente la tabla
+ * es una lista de símbolos.
+ * @author Erick
+ */
+public class TablaDeSimbolos extends LinkedList<Simbolo>{
+    /**
+     * Constructor de la clase que lo único que hace es llamar al constructor de 
+     * la clase padre, es decir, el constructor de LinkedList.
+     */
+    public TablaDeSimbolos() {
+        super();
+    }
+    /**
+     * Método que busca una variable en la tabla de símbolos y devuelve su valor.
+     * @param id Identificador de la variable que quiere buscarse
+     * @return Valor de la variable que se buscaba, si no existe se devuelve nulo
+     */
+    Object getValor(String id) {
+        for(Simbolo s:this){
+            if(s.getId().equals(id)){
+                return s.getValor();
+            }
+        }
+        System.out.println("La variable "+id+" no existe en este ámbito.");
+        return null;
+    }
+    /**
+     * Método que busca cierta celda en un arreglo dentro de la tabla de símbolos
+     * y devuelve su valor
+     * @param id Identificador del arreglo
+     * @param indices Indices con los que se desea acceder al arreglo
+     * @return Si el arreglo y su celda existe devuelve el valor, de lo contrario devuelve nulo
+     */
+    Object getValor(String id, LinkedList<Integer> indices) {
+        for(Simbolo s:this){
+            if(s.getId().equals(id)){
+                return s.getValor(id, indices);
+            }
+        }
+        System.out.println("La variable "+id+" no existe en este ámbito.");
+        return null;
+    }
+    
+    /**
+     * Método que asigna un valor a una variable específica, si no la encuentra 
+     * no realiza la asignación y despliega un mensaje de error.
+     * @param id Identificador de la variable que quiere buscarse
+     * @param valor Valor que quiere asignársele a la variable buscada
+     */
+    void setValor(String id, Object valor) {
+        for(Simbolo s:this){
+            if(s.getId().equals(id)){
+                s.setValor(valor);
+                return;
+            }
+        }
+        System.out.println("La variable "+id+" no existe en este ámbito, por lo "
+                + "que no puede asignársele un valor.");
+    }
+    /**
+     * Método que asigna un valor a cierta celda de un arreglo.
+     * @param id Identificador del arreglo
+     * @param valor Valor que se desea asignar a la celda del arreglo
+     * @param indices Indices para acceder a la celda del arreglo
+     */
+    void setValor(String id, Object valor, LinkedList<Integer> indices) {
+        for(Simbolo s:this){
+            if(s.getId().equals(id)){
+                s.setValor(valor,indices);
+                return;
+            }
+        }
+        System.out.println("La variable "+id+" no existe en este ámbito, por lo "
+                + "que no puede asignársele un valor.");
+    }
+}
