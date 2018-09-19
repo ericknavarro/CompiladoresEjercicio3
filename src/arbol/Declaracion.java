@@ -12,6 +12,10 @@ package arbol;
  */
 public class Declaracion implements Instruccion{
     /**
+     * Bandera que indica si lo que se declara es un parámetro o no.
+     */
+    protected boolean parametro;
+    /**
      * Identificador de la variable que será declarada.
      */
     protected final String id;
@@ -36,6 +40,7 @@ public class Declaracion implements Instruccion{
             default:
                 tipo=null;
         }
+        parametro=false;
     }
     /**
      * Método que ejecuta la accion de declarar una variable, es una sobreescritura del 
@@ -46,7 +51,9 @@ public class Declaracion implements Instruccion{
      */
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
-        ts.add(new Simbolo(id,tipo));
+        Simbolo aux=new Simbolo(id,tipo);
+        aux.setParametro(this.parametro);
+        ts.add(aux);
         return null;
     }
     /**
@@ -55,6 +62,20 @@ public class Declaracion implements Instruccion{
      */
     public String getIdentificador() {
         return id;
+    }
+    /**
+     * Método que devuelve el valor de la bandera parámetro
+     * @return 
+     */
+    public boolean isParametro() {
+        return parametro;
+    }
+    /**
+     * Método con el que se configura el valor de la bandera parámetro.
+     * @param parametro 
+     */
+    public void setParametro(boolean parametro) {
+        this.parametro = parametro;
     }
     
 }

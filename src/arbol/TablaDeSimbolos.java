@@ -27,9 +27,13 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
      * @return Valor de la variable que se buscaba, si no existe se devuelve nulo
      */
     Object getValor(String id) {
-        for(Simbolo s:this){
-            if(s.getId().equals(id)){
-                return s.getValor();
+        for (int i = this.size()-1; i >= 0; i--) {
+            Simbolo s=this.get(i);
+            if(s.isParametro() && s.isParametroInicializado() || !s.isParametro()){
+                if(s.getId().equals(id)){
+                    Object aux=s.getValor();
+                    return aux;
+                }
             }
         }
         System.out.println("La variable "+id+" no existe en este ámbito.");
@@ -59,7 +63,8 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
      * @param valor Valor que quiere asignársele a la variable buscada
      */
     void setValor(String id, Object valor) {
-        for(Simbolo s:this){
+        for (int i = this.size()-1; i >= 0; i--) {
+            Simbolo s=this.get(i);
             if(s.getId().equals(id)){
                 s.setValor(valor);
                 return;
@@ -83,5 +88,20 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
         }
         System.out.println("La variable "+id+" no existe en este ámbito, por lo "
                 + "que no puede asignársele un valor.");
+    }
+    /**
+     * Méotodo que marca como inicializado el último parámetro agregado con el nombre de identificador indicado.
+     * @param id 
+     */
+    void setParametroInicializado(String id) {
+        for (int i = this.size()-1; i >= 0; i--) {
+            Simbolo s=this.get(i);
+            if(s.getId().equals(id)){
+                s.setParametroInicializado(true);
+                return;
+            }
+        }
+        System.out.println("El parámtro "+id+" que quiere marcar como inicializado no existe en este ámbito, por lo "
+                + "que no puede marcar.");
     }
 }

@@ -16,6 +16,14 @@ import java.util.LinkedList;
  */
 public class Simbolo {
     /**
+     * Bandera que indica si el símbolo creado es un parámetro o no.
+     */
+    private boolean parametro;
+    /**
+     * Si el símbolo es un parámetro y además ya se le asigno valor esta bandera es verdadera, de lo contrario es falsa.
+     */
+    private boolean parametroInicializado;
+    /**
      * Tipo del símbolo que se almacena
      */
     private final Tipo tipo;
@@ -41,6 +49,8 @@ public class Simbolo {
         this.tipo = tipo;
         this.id = id;
         this.tamaniosDimensiones = null;
+        this.parametro=false;
+        this.parametroInicializado=false;
     }
     /**
      * Constructor para los símbolos que almacenan un arreglo
@@ -125,5 +135,33 @@ public class Simbolo {
         CADENA,
         BOOLEANO,
         VOID
+    }
+    /**
+     * Método que devuelve el valor de la bandera parámetro.
+     * @return 
+     */
+    public boolean isParametro() {
+        return parametro;
+    }
+    /**
+     * Método con el que se configura el valor de la bandera parámetro.
+     * @param parametro 
+     */
+    public void setParametro(boolean parametro) {
+        this.parametro = parametro;
+    }
+    /**
+     * Método que devuelve el valor de la bandera parámetro inicializado.
+     * @return 
+     */
+    public boolean isParametroInicializado() {
+        return parametroInicializado;
+    }
+    /**
+     * Método con el que se configura el valor de la bandera parámetro inicializado.
+     * @param parametroInicializado
+     */
+    public void setParametroInicializado(boolean parametroInicializado) {
+        this.parametroInicializado = parametroInicializado;
     }
 }

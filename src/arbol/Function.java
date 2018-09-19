@@ -94,10 +94,12 @@ public class Function implements Instruccion {
         tablaLocal.addAll(ts);
         if(parametros.size()==valoresParametros.size()){
             for(int i=0;i<parametros.size();i++){
-                Declaracion d=parametros.get(i);
-                Asignacion a=new Asignacion(d.getIdentificador(), valoresParametros.get(i));
+                Declaracion d=parametros.get(i); 
+                d.setParametro(true);
                 d.ejecutar(tablaLocal, ar);
+                Asignacion a=new Asignacion(d.getIdentificador(), valoresParametros.get(i));
                 a.ejecutar(tablaLocal, ar);
+                tablaLocal.setParametroInicializado(d.getIdentificador());
             }
             for(Instruccion ins:instrucciones){
                 Object r;

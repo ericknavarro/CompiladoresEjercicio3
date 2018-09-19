@@ -8,6 +8,20 @@ Declare Number a;
 Declare Number b;
 
 Function Void main(){
+	Print("Fibonacci de 0 es: " & fibonacci(0));
+	Print("Fibonacci de 1 es: " & fibonacci(1));
+	Print("Fibonacci de 2 es: " & fibonacci(2));
+	Print("Fibonacci de 3 es: " & fibonacci(3));
+	Print("Fibonacci de 4 es: " & fibonacci(4));
+	Print("Fibonacci de 5 es: " & fibonacci(5));
+	Print("Fibonacci de 6 es: " & fibonacci(6));
+	Print("Fibonacci de 7 es: " & fibonacci(7));
+	Print("Fibonacci de 8 es: " & fibonacci(8));
+	Print("Fibonacci de 9 es: " & fibonacci(9));
+	Print("Fibonacci de 10 es: " & fibonacci(10));
+	Print("Fibonacci de 11 es: " & fibonacci(11));
+	Print("Fibonacci de 12 es: " & fibonacci(12));
+	Print("Fibonacci de 13 es: " & fibonacci(13));
 	a=2;
 	b=3;
 	Declare Number c[a][b];
@@ -92,5 +106,17 @@ Function Void imprimirSet2(Number paramSup){
 			Print("----------------");
 			Break;
 		}
+	}
+}
+
+Function Number fibonacci (Number n)
+{
+	if (n<0){
+		Print("Debes ingresar un tamaño mayor o igual a 0");
+		return -1;
+	}elseif((n == 0) Or (n == 1) Or (n == 2)){
+		return 1;
+	}else{
+		return fibonacci(n-1) + fibonacci(n-2);
 	}
 }
