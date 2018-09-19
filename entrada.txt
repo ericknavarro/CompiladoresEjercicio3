@@ -114,7 +114,9 @@ Function Number fibonacci (Number n)
 	if (n<0){
 		Print("Debes ingresar un tamaño mayor o igual a 0");
 		return -1;
-	}elseif((n == 0) Or (n == 1) Or (n == 2)){
+	}elseif(n == 0){
+		return 0;
+	}elseif(n == 1){
 		return 1;
 	}else{
 		return fibonacci(n-1) + fibonacci(n-2);
