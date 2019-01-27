@@ -122,7 +122,17 @@ public class Function implements Instruccion {
      * @return Identificador de la función
      */
     public String getIdentificador() {
-        return identificador.toLowerCase();
+
+        // se crea un identificador único de las funciones con base en su Id más el número de enteros (id_p#)
+        // este formato es simple ya que solo hay un tipo de dato: Entero
+        // cuando se maneje más de un Tipo es necesario generar un identificador que maneje estos casos.
+        // formato suggerido: id_tipo_tipo
+
+        int numParametros = 0;
+        if (parametros != null) {
+            numParametros = parametros.size();
+        }
+        return identificador.toLowerCase() + "_p" + numParametros;
     }
     /**
      * Método que configura el set de parámetros que la función debe recibir

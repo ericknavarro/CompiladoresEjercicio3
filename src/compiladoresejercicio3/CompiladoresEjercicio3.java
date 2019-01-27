@@ -19,7 +19,8 @@ public class CompiladoresEjercicio3 {
      * @param args argumentos de la linea de comando
      */
     public static void main(String[] args) {
-        interpretar("entrada.txt");
+        // leo el archivo de pruebas
+        interpretar("entrada_sobrecarga_de_funciones.txt");
     }
     /**
      * Método que lee el contenido de un archivo de texto y ejecuta las 

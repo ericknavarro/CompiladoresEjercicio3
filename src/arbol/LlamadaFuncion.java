@@ -41,7 +41,15 @@ public class LlamadaFuncion implements Instruccion{
      */
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
-        Function f=ar.getFunction(identificador);
+        
+        // creando identificador único
+        int numParametros = 0;
+        if (parametros != null) {
+            numParametros = parametros.size();
+        }
+        
+        // para llamar a la función es necesario construir su identificaro único
+        Function f=ar.getFunction(identificador + "_p" + numParametros);
         if(null!=f){
             f.setValoresParametros(parametros);
             return f.ejecutar(ts, ar);

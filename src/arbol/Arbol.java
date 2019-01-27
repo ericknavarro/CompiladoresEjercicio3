@@ -43,7 +43,8 @@ public class Arbol implements Instruccion{
             if(ins instanceof Function){
                 Function f=(Function)ins;
                 String id=f.getIdentificador();
-                if("main".equals(id)){
+                // el identificador único de la función main es main_p0 ya que no recibe parámetros
+                if("main_p0".equals(id)){
                     f.setValoresParametros(new LinkedList<>());
                     f.ejecutar(ts, ar);
                     break;
