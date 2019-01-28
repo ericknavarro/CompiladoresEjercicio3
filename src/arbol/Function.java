@@ -90,14 +90,18 @@ public class Function implements Instruccion {
      */
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
-        TablaDeSimbolos tablaLocal=new TablaDeSimbolos();
-        tablaLocal.addAll(ts);
+        TablaDeSimbolos tablaLocal=new TablaDeSimbolos(); // Creamos una nueva tabla local para la función.
+        tablaLocal.addAll(Arbol.tablaDeSimbolosGlobal); // Agregamos a la tabla local las referencias a las variables globales.
         if(parametros.size()==valoresParametros.size()){
             for(int i=0;i<parametros.size();i++){
+                
                 Declaracion d=parametros.get(i); 
                 d.setParametro(true);
                 d.ejecutar(tablaLocal, ar);
+                
                 Asignacion a=new Asignacion(d.getIdentificador(), valoresParametros.get(i));
+                a.setTablaDeSimbolosPadre(ts); // Indicamos que los valores de los parámetros los debe obtener de la tabla padre de esta función.
+                
                 a.ejecutar(tablaLocal, ar);
                 tablaLocal.setParametroInicializado(d.getIdentificador());
             }
