@@ -31,7 +31,7 @@ public class Declaracion implements Instruccion{
     public Declaracion(String a, String b) {
         id=a;
         switch (b.toLowerCase()) {
-            case "numeric": tipo=Simbolo.Tipo.NUMERO;
+            case "number": tipo=Simbolo.Tipo.NUMERO;
                      break;
             case "string":  tipo=Simbolo.Tipo.CADENA;
                      break;
