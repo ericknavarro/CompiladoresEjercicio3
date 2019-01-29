@@ -39,7 +39,15 @@ Function Void main(){
 	Print("Factorial de 5 es: " & factorial2(5));
 	imprimirSet(10);
 	imprimirSet2(5);
+	concatenar ("Hola", "Mundo");
 	Print("Esto es el final de la prueba");
+	Declare Number variableEnMain;
+	variableEnMain=10;
+	imprimirVariableEnMain();
+}
+
+Function Void imprimirVariableEnMain(){
+	Print(variableEnMain);
 }
 
 Function Void tablas(Number param1, Number param2){
@@ -121,4 +129,9 @@ Function Number fibonacci (Number n)
 	}else{
 		return fibonacci(n-1) + fibonacci(n-2);
 	}
+}
+
+Function Void concatenar (String a, String b)
+{
+	Print("La cadena concatenada es: " & a & " " & b);
 }

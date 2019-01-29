@@ -53,6 +53,8 @@ public class LlamadaFuncion implements Instruccion{
         if(null!=f){
             f.setValoresParametros(parametros);
             return f.ejecutar(ts, ar);
+        } else {
+            System.err.println("La función " + identificador + " no existe.");    
         }
         return null;
     }

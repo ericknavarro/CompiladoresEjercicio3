@@ -36,7 +36,7 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
                 }
             }
         }
-        System.out.println("La variable "+id+" no existe en este ámbito.");
+        System.err.println("La variable "+id+" no existe en este ámbito.");
         return null;
     }
     /**
