@@ -22,7 +22,7 @@ public class Arbol implements Instruccion{
     /**
      * Variable correspondiente a la instancia de la tabla de simbolos global que podrá ser accedida por cualquier función interpretada.
      */
-    public static TablaDeSimbolos tablaDeSimbolosGlobal;
+    public TablaDeSimbolos tablaDeSimbolosGlobal;
     
     /**
      * Constructor de la clase Arbol
