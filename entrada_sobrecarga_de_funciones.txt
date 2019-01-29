@@ -11,6 +11,11 @@ Function Void main(){
 	Print("Prueba de metodos con el mismo nombre y diferentes parametros");
 	Contar(4);
 	Contar(2, 4);
+
+	Saludar("Rainman");
+	Saludar("Rainman", "Sian");
+	Saludar("Rainman", 30);
+
 	Print("Esto es el final de la prueba");
 }
 
@@ -20,4 +25,16 @@ Function Void Contar(Number hasta) {
 
 Function Void Contar(Number desde, Number hasta) {
 	Print("Contando desde " & desde & " hasta " & hasta);
+}
+
+Function Void Saludar(String nombre) {
+	Print("Hola " & nombre);
+}
+
+Function Void Saludar(String nombre, Number edad) {
+	Print("Hola " & nombre & " de " & edad & " anios de edad");
+}
+
+Function Void Saludar(String nombre, String apellido) {
+	Print("Hola " & nombre & " " & apellido);
 }

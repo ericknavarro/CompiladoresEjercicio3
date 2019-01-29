@@ -48,8 +48,24 @@ public class LlamadaFuncion implements Instruccion{
             numParametros = parametros.size();
         }
         
-        // para llamar a la función es necesario construir su identificaro único
-        Function f=ar.getFunction(identificador + "_p" + numParametros);
+        // para llamar a la función es necesario construir su identificador único
+        String id = "_" + identificador.toLowerCase() + "(";
+        for(Instruccion parametro: parametros) {
+            // es necesario evaluar los parametros de la función para saber sus tipo
+            // y así poder completar el id
+            Object resultado = parametro.ejecutar(ts, ar);
+            
+            if (resultado instanceof Double) {
+                id += "_" + Simbolo.Tipo.NUMERO;
+            } else if(resultado instanceof String) {
+                id += "_" + Simbolo.Tipo.CADENA;
+            } else if(resultado instanceof Boolean){
+                id += "_" + Simbolo.Tipo.BOOLEANO;
+            }
+        }
+        id += ")";
+        
+        Function f=ar.getFunction(id);
         if(null!=f){
             f.setValoresParametros(parametros);
             return f.ejecutar(ts, ar);
