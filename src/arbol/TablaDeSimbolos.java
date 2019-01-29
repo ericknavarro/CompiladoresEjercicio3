@@ -66,13 +66,39 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
         for (int i = this.size()-1; i >= 0; i--) {
             Simbolo s=this.get(i);
             if(s.getId().equals(id)){
-                s.setValor(valor);
+                Tipo t = s.getTipo();
+                Tipo tvalor = getValorTipo(valor);
+                if(t == tvalor){
+                    s.setValor(valor);
+                }else {
+                System.out.println("La variable "+id+" no es del mismo tipo \""+ t.name() +"\" del valor. \"" + tvalor.name()+"\"");
+                }
                 return;
             }
         }
         System.out.println("La variable "+id+" no existe en este ámbito, por lo "
                 + "que no puede asignársele un valor.");
     }
+    
+    /**
+     * Método que devuelve el tipo del objeto valor a asignar a las variables
+     * @param valor Valor que se desea averiguar el tipo
+     */
+    Tipo getValorTipo (Object valor){
+        Tipo tipo = null;
+        if(valor.getClass()==Integer.class){
+            tipo = Tipo.NUMERO;
+            return tipo;
+        } else if(valor.getClass()==String.class){
+            tipo = Tipo.CADENA;
+            return tipo;
+        } else if(valor.getClass()==boolean.class){
+            tipo = Tipo.BOOLEANO;
+            return tipo;
+        }
+        return tipo;
+    }
+    
     /**
      * Método que asigna un valor a cierta celda de un arreglo.
      * @param id Identificador del arreglo
