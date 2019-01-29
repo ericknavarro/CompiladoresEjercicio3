@@ -39,6 +39,16 @@ public class DeclaracionArreglo extends Declaracion implements Instruccion{
         LinkedList<Integer> tamaniosDimensiones=new LinkedList<>();
         for (Instruccion dim : dimensiones) {
             Object er=dim.ejecutar(ts, ar);
+            //Se debe de verificar que la variable exista y se le haya dado un valor
+            if(er == null) {
+                System.err.println("Una de las dimensiones para la creacion del arreglo es nula");
+                return null;
+            }
+            //Se comprueba que el tipo de la variable sea number
+            if(!(er instanceof Double)){
+                System.err.println("Una de las dimensiones para la creacion del arreglo no es numerica");
+                return null;
+            }
             tamaniosDimensiones.add(((Double)er).intValue());
         }
         ts.add(new Simbolo(id,tipo,tamaniosDimensiones));

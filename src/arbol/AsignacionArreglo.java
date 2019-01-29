@@ -40,6 +40,16 @@ public class AsignacionArreglo extends Asignacion implements Instruccion{
         LinkedList<Integer> valoresIndices=new LinkedList<>();
         for (Instruccion dim : indices) {
             Object er=dim.ejecutar(ts, ar);
+            //Se debe de verificar que la variable exista y se le haya dado un valor
+            if(er == null) {
+                System.err.println("Una de las dimensiones para la creacion del arreglo es nula");
+                return null;
+            }
+            //Se comprueba que el tipo de la variable sea number
+            if(!(er instanceof Double)){
+                System.err.println("Una de las dimensiones para la creacion del arreglo no es numerica");
+                return null;
+            }
             valoresIndices.add(((Double)er).intValue());
         }
         ts.setValor(id,valor.ejecutar(ts,ar),valoresIndices);
