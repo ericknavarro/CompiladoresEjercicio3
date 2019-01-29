@@ -91,7 +91,7 @@ public class Function implements Instruccion {
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
         TablaDeSimbolos tablaLocal=new TablaDeSimbolos(); // Creamos una nueva tabla local para la función.
-        tablaLocal.addAll(Arbol.tablaDeSimbolosGlobal); // Agregamos a la tabla local las referencias a las variables globales.
+        tablaLocal.addAll(ar.tablaDeSimbolosGlobal); // Agregamos a la tabla local las referencias a las variables globales.
         if(parametros.size()==valoresParametros.size()){
             for(int i=0;i<parametros.size();i++){
                 
