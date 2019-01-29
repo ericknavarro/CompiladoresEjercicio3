@@ -42,7 +42,7 @@ public class Function implements Instruccion {
      */
     public Function(String a, String b, LinkedList<Declaracion> c, LinkedList<Instruccion> d) {
         switch (a.toLowerCase()) {
-            case "numeric": tipo=Simbolo.Tipo.NUMERO;
+            case "number": tipo=Simbolo.Tipo.NUMERO;
                      break;
             case "string":  tipo=Simbolo.Tipo.CADENA;
                      break;
@@ -65,7 +65,7 @@ public class Function implements Instruccion {
      */
     public Function(String a, String b, LinkedList<Instruccion> c) {
         switch (a.toLowerCase()) {
-            case "numeric": tipo=Simbolo.Tipo.NUMERO;
+            case "number": tipo=Simbolo.Tipo.NUMERO;
                      break;
             case "string":  tipo=Simbolo.Tipo.CADENA;
                      break;
