@@ -126,7 +126,19 @@ public class Function implements Instruccion {
      * @return Identificador de la función
      */
     public String getIdentificador() {
-        return identificador.toLowerCase();
+
+        // se crea un identificador único de las funciones con base en su Id 
+        // más el tipo de sus parametros de la forma _id(_tipo..._tipo)
+
+        String id = "_" + identificador + "(";
+        if (parametros != null) {
+            for (Declaracion parametro: parametros) {
+                id += "_" + parametro.tipo.name();
+            }
+        }
+        id += ")";
+        
+        return id.toLowerCase();
     }
     /**
      * Método que configura el set de parámetros que la función debe recibir
