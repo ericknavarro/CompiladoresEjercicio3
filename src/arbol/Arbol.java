@@ -17,6 +17,13 @@ public class Arbol implements Instruccion{
      * Lista de las instrucciones (Funciones y declaraciones de variables globales) que componen el archivo.
      */
     private final LinkedList<Instruccion> instrucciones;
+    
+    
+    /**
+     * Variable correspondiente a la instancia de la tabla de simbolos global que podrá ser accedida por cualquier función interpretada.
+     */
+    public TablaDeSimbolos tablaDeSimbolosGlobal;
+    
     /**
      * Constructor de la clase Arbol
      * @param a Lista de instrucciones que conforman al Arbol
@@ -33,6 +40,9 @@ public class Arbol implements Instruccion{
      */    
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
+        
+        tablaDeSimbolosGlobal = ts;
+        
         for(Instruccion ins:instrucciones){
             if(ins instanceof Declaracion){
                 Declaracion d=(Declaracion)ins;
@@ -65,7 +75,7 @@ public class Arbol implements Instruccion{
             if(ins instanceof Function){
                 Function f=(Function)ins;
                 String id=f.getIdentificador();
-                if(identificador.toLowerCase().equals(id)){
+                if(identificador.equalsIgnoreCase(id)){
                     return f;
                 }
             }

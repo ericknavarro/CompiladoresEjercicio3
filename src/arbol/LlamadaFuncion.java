@@ -49,7 +49,7 @@ public class LlamadaFuncion implements Instruccion{
         }
         
         // para llamar a la función es necesario construir su identificador único
-        String id = "_" + identificador.toLowerCase() + "(";
+        String id = "_" + identificador + "(";
         for(Instruccion parametro: parametros) {
             // es necesario evaluar los parametros de la función para saber sus tipo
             // y así poder completar el id
@@ -65,10 +65,12 @@ public class LlamadaFuncion implements Instruccion{
         }
         id += ")";
         
-        Function f=ar.getFunction(id);
+        Function f=ar.getFunction(id.toLowerCase());
         if(null!=f){
             f.setValoresParametros(parametros);
             return f.ejecutar(ts, ar);
+        } else {
+            System.err.println("La función " + identificador + " no existe.");    
         }
         return null;
     }

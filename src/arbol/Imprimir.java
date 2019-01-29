@@ -33,7 +33,7 @@ public class Imprimir implements Instruccion{
      */
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
-        System.out.println(contenido.ejecutar(ts,ar).toString());
+        System.out.println(String.valueOf(contenido.ejecutar(ts,ar)));
         return null;
     }
     

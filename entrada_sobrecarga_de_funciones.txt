@@ -20,7 +20,7 @@ Function Void main(){
 }
 
 Function Void Contar(Number hasta) {
-	Print("Contando desde 1 hasta " & hasta);
+	Print("Contando desde 1.0 hasta " & hasta);
 }
 
 Function Void Contar(Number desde, Number hasta) {
