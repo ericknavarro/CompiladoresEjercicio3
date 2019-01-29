@@ -42,12 +42,12 @@ public class AsignacionArreglo extends Asignacion implements Instruccion{
             Object er=dim.ejecutar(ts, ar);
             //Se debe de verificar que la variable exista y se le haya dado un valor
             if(er == null) {
-                System.err.println("Una de las dimensiones para la creacion del arreglo es nula");
+                System.err.println("Una de las dimensiones para la Asignacion del arreglo es nula");
                 return null;
             }
             //Se comprueba que el tipo de la variable sea number
             if(!(er instanceof Double)){
-                System.err.println("Una de las dimensiones para la creacion del arreglo no es numerica");
+                System.err.println("Una de las dimensiones para la Asignacion del arreglo no es numerica");
                 return null;
             }
             valoresIndices.add(((Double)er).intValue());

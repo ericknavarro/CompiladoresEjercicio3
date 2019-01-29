@@ -44,6 +44,15 @@ public class AccesoArreglo implements Instruccion{
         LinkedList<Integer> valoresIndices=new LinkedList<>();
         for (Instruccion dim : indices) {
             Object er=dim.ejecutar(ts, ar);
+            if(er == null) {
+                System.err.println("Una de las dimensiones para el acceso al arreglo es nula");
+                return null;
+            }
+            //Se comprueba que el tipo de la variable sea number
+            if(!(er instanceof Double)){
+                System.err.println("Una de las dimensiones para el acceso al  arreglo no es numerica");
+                return null;
+            }
             valoresIndices.add(((Double)er).intValue());
         }
         return ts.getValor(id, valoresIndices);
