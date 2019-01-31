@@ -18,7 +18,7 @@ public class Arbol implements Instruccion{
      */
     private final LinkedList<Instruccion> instrucciones;
     
-    
+    private static Simbolo.Tipo tipoFuncionPre;
     /**
      * Variable correspondiente a la instancia de la tabla de simbolos global que podrá ser accedida por cualquier función interpretada.
      */
@@ -40,7 +40,6 @@ public class Arbol implements Instruccion{
      */    
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
-        
         tablaDeSimbolosGlobal = ts;
         
         for(Instruccion ins:instrucciones){
@@ -53,6 +52,7 @@ public class Arbol implements Instruccion{
             if(ins instanceof Function){
                 Function f=(Function)ins;
                 String id=f.getIdentificador();
+                //tipoFuncionPre = f.getTipo();
                 if("main".equals(id)){
                     f.setValoresParametros(new LinkedList<>());
                     f.ejecutar(ts, ar);
@@ -74,12 +74,17 @@ public class Arbol implements Instruccion{
             if(ins instanceof Function){
                 Function f=(Function)ins;
                 String id=f.getIdentificador();
+                tipoFuncionPre = f.getTipo();
                 if(identificador.toLowerCase().equals(id)){
                     return f;
                 }
             }
         }
         return null;
+    }
+    
+    public static Simbolo.Tipo getFuncionPre(){
+        return tipoFuncionPre;
     }
     
 }
