@@ -37,8 +37,14 @@ public class Return implements Instruccion{
     @Override
     public Object ejecutar(TablaDeSimbolos ts, Arbol ar) {
         if(valorRetorno==null){
+            if (Arbol.getFuncionPre().toString() != "VOID") {
+                System.err.println("Se tiene que retornar un tipo de datos:" + Arbol.getFuncionPre().toString());
+            }
             return this;
         }else{
+            if (Arbol.getFuncionPre().toString() == "VOID") {
+                System.err.println("No se puede retornar un objeto en un procedimiento");
+            }
             return valorRetorno.ejecutar(ts, ar);
         }
     }
