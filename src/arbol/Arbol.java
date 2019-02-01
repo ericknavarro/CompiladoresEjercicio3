@@ -18,7 +18,7 @@ public class Arbol implements Instruccion{
      */
     private final LinkedList<Instruccion> instrucciones;
     
-    private static Simbolo.Tipo tipoFuncionPre;
+    private Function FunctionPre; // Declaración de variable temporal.
     /**
      * Variable correspondiente a la instancia de la tabla de simbolos global que podrá ser accedida por cualquier función interpretada.
      */
@@ -74,7 +74,7 @@ public class Arbol implements Instruccion{
             if(ins instanceof Function){
                 Function f=(Function)ins;
                 String id=f.getIdentificador();
-                tipoFuncionPre = f.getTipo();
+                FunctionPre = f;// Variable temporal para guardar el objeto de la clase "Function"
                 if(identificador.toLowerCase().equals(id)){
                     return f;
                 }
@@ -83,8 +83,11 @@ public class Arbol implements Instruccion{
         return null;
     }
     
-    public static Simbolo.Tipo getFuncionPre(){
-        return tipoFuncionPre;
+    /*
+        Funcion para retornar un objeto de la clase Function
+    */
+    public Function getFuncionPre(){
+        return FunctionPre;
     }
     
 }
