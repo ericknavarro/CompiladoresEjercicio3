@@ -36,14 +36,24 @@ public class Return implements Instruccion{
      */    
     @Override
     public Object ejecutar(TablaDeSimbolos ts, Arbol ar) {
+        String tipoFuncion = ar.getFuncionPre().getTipo().toString(); // Get tipo de la funcion
+        String idFuncion = ar.getFuncionPre().getIdentificador().toString(); // Get indentificador de la funcion
         if(valorRetorno==null){
-            if (Arbol.getFuncionPre().toString() != "VOID") {
-                System.err.println("Se tiene que retornar un tipo de datos:" + Arbol.getFuncionPre().toString());
+            /*
+                Condicion cuando el return contiene un dato que retornar
+                se verifica que la funcion no tenga VOID si no salta un error
+            */
+            if (tipoFuncion.toLowerCase().equals("VOID".toLowerCase()) == false) {
+                System.err.println("ERROR:Se tiene que retornar un tipo de variable que indica el retorno la funcion: " + idFuncion);
             }
             return this;
         }else{
-            if (Arbol.getFuncionPre().toString() == "VOID") {
-                System.err.println("No se puede retornar un objeto en un procedimiento");
+            /*
+                Condicion cuando el return NO contiene un dato que retornar
+                se verifica que la funcion TENGA VOID si no salta un error
+             */
+            if (tipoFuncion.toLowerCase().equals("VOID".toLowerCase())) {
+                System.err.println("ERROR:No se puede retornar el tipo de variable dado que la funcion es VOID o equivalente un procedimiento, error en la funcion: "+ idFuncion);
             }
             return valorRetorno.ejecutar(ts, ar);
         }
