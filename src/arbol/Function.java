@@ -136,6 +136,9 @@ public class Function implements Instruccion {
         valoresParametros=a;
     }
     
+    /*
+        Funcion para retornar el tipo de la funcion
+    */
     public Simbolo.Tipo getTipo(){
        return tipo; 
     }
