@@ -30,7 +30,8 @@ public class Declaracion implements Instruccion{
      */
     public Declaracion(String a, String b) {
         id=a;
-        switch (b.toLowerCase()) {
+        String reservadaTipo=b.toLowerCase();
+        switch (reservadaTipo) {
             case "number": tipo=Simbolo.Tipo.NUMERO;
                      break;
             case "string":  tipo=Simbolo.Tipo.CADENA;
