@@ -85,7 +85,21 @@ public class Simbolo {
      * @param v Nuevo valor para la variable.
      */
     void setValor(Object v) {
-        valor=v;
+        //Variable que alberga el tipo del valor a asignar
+        Tipo vTipo=null;
+        if (v instanceof Double) {
+            vTipo = Simbolo.Tipo.NUMERO;
+        } else if(v instanceof String) {
+            vTipo = Simbolo.Tipo.CADENA;
+        } else if(v instanceof Boolean){
+            vTipo = Simbolo.Tipo.BOOLEANO;
+        }
+        //¿Es el valor a asignar igual al tipo de la variable a la que se le va a asignar el valor?
+        if(vTipo == tipo){
+            valor=v;
+        }else{
+            System.err.println("Esta intentando asignar un valor de tipo ["+(vTipo==null?"null":vTipo.name())+"] a la variable ["+id+"] de tipo ["+tipo.name()+ "], esto no está permitido.");
+        }
     }
     /**
      * Método que setea un valor en cierta celda de un arreglo.

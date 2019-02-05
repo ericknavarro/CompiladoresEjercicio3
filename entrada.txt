@@ -51,6 +51,8 @@ Function Void main(){
 	Declare Number d[15][True];
 	c["Hola mundo"][0]=100;
 	a=c["Cadena"][0];
+	Declare Number e;
+	e="Hola mundo";
 }
 
 Function Void voidQueRetornaValor(){
