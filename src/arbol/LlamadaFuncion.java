@@ -41,17 +41,11 @@ public class LlamadaFuncion implements Instruccion{
      */
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
-        
-        // creando identificador único
-        int numParametros = 0;
-        if (parametros != null) {
-            numParametros = parametros.size();
-        }
-        
+ 
         // para llamar a la función es necesario construir su identificador único
         String id = "_" + identificador + "(";
         for(Instruccion parametro: parametros) {
-            // es necesario evaluar los parametros de la función para saber sus tipo
+            // es necesario evaluar los parametros de la función para saber sus tipos
             // y así poder completar el id
             Object resultado = parametro.ejecutar(ts, ar);
             
