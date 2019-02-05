@@ -44,7 +44,25 @@ public class LlamadaFuncion implements Instruccion{
         Function f=ar.getFunction(identificador);
         if(null!=f){
             f.setValoresParametros(parametros);
-            return f.ejecutar(ts, ar);
+            Object rFuncion=f.ejecutar(ts, ar); //Objeto que almacena el resultado de la ejecución del proceso
+            if(f.getTipo()==Simbolo.Tipo.VOID && !(rFuncion instanceof Return || rFuncion == null)){
+                System.err.println("Una función de tipo Void no puede retornar valores, solamente puede retornar vacío.");
+                return null;
+            }else if(f.getTipo()==Simbolo.Tipo.NUMERO && !(rFuncion instanceof Double)){
+                System.err.println("Una función de tipo Number no puede retornar un valor que no sea numérico.");
+                return null;
+            }else if(f.getTipo()==Simbolo.Tipo.BOOLEANO && !(rFuncion instanceof Boolean)){
+                System.err.println("Una función de tipo Boolean no puede retornar un valor que no sea verdadero o falso.");
+                return null;
+            }else if(f.getTipo()==Simbolo.Tipo.CADENA && !(rFuncion instanceof String)){
+                System.err.println("Una función de tipo Cadena no puede retornar un valor que no sea una cadena de caracteres.");
+                return null;
+            }
+            if(rFuncion instanceof Return){
+                return null;
+            }else{
+                return rFuncion;
+            }
         } else {
             System.err.println("La función " + identificador + " no existe.");    
         }
