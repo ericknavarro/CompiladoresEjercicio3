@@ -52,15 +52,7 @@ public class For implements Instruccion{
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
         inicializador.ejecutar(ts,ar);
-        
-        Object resultado = condicion.ejecutar(ts, ar);
-        
-        if(!(resultado instanceof Boolean)){
-            System.err.println("Se esperaba un valor booleano");
-            return null;
-        }
-        
-        while((Boolean)resultado){
+        while((Boolean)condicion.ejecutar(ts,ar)){
             incrementador.ejecutar(ts,ar);
             TablaDeSimbolos tablaLocal=new TablaDeSimbolos();
             tablaLocal.addAll(ts);
@@ -75,7 +67,6 @@ public class For implements Instruccion{
                     }
                 }
             }
-            resultado = condicion.ejecutar(ts,ar);
         }
         return null;
     }   
