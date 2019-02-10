@@ -39,6 +39,8 @@ public class DoWhile implements Instruccion{
      */
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
+        Object resultado;
+        
         do{
             TablaDeSimbolos tablaLocal=new TablaDeSimbolos();
             tablaLocal.addAll(ts);
@@ -53,7 +55,16 @@ public class DoWhile implements Instruccion{
                     }
                 }
             }
-        }while((Boolean)condicion.ejecutar(ts,ar));
+            
+            resultado = condicion.ejecutar(ts, ar);
+            
+            if(!(resultado instanceof Boolean)){
+                System.err.println("Se esperaba un valor booleano");
+                return null;
+            }
+            
+        }while((Boolean)resultado);
+        
         return null;
     }   
 }
