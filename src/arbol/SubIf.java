@@ -66,7 +66,19 @@ public class SubIf implements Instruccion{
      */
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
-        valorCondicion=((condicion==null)?false:(Boolean)condicion.ejecutar(ts,ar));        
+        Object resultado = (condicion == null)? false: condicion.ejecutar(ts, ar);
+        
+        if(resultado != null){
+            if(resultado instanceof Boolean){
+                valorCondicion = (Boolean)resultado;
+            }else{
+                System.err.println("Se esperaba un valor booleano");
+                return null;
+            }
+        }else{
+            valorCondicion = false;
+        }
+        
         if(valorCondicion || isElse){
             TablaDeSimbolos tablaLocal=new TablaDeSimbolos();
             tablaLocal.addAll(ts);

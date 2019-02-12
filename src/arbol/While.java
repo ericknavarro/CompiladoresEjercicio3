@@ -39,7 +39,14 @@ public class While implements Instruccion{
      */
     @Override
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
-        while((Boolean)condicion.ejecutar(ts,ar)){
+        Object resultado = condicion.ejecutar(ts, ar);
+        
+        if(!(resultado instanceof Boolean)){
+            System.err.println("Se esperaba un valor booleano");
+           return null; 
+        }
+        
+        while((Boolean)resultado){
             TablaDeSimbolos tablaLocal=new TablaDeSimbolos();
             tablaLocal.addAll(ts);
             for(Instruccion ins:listaInstrucciones){
@@ -53,7 +60,9 @@ public class While implements Instruccion{
                     }
                 }
             }
+            
+            resultado = condicion.ejecutar(ts, ar);
         }
-        return null;
+		return null;
     }   
 }
