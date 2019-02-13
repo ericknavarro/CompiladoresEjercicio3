@@ -8,6 +8,10 @@ Declare Number a;
 Declare Number b;
 
 Function Void main(){
+	Print("El resultado del void que retorna valor es: " & voidQueRetornaValor());
+	Print("El resultado de la función number que no retorna number es: " & numberQueNoRetornaNumber());
+	Print("El resultado de la función boolean que no retorna boolean es: " & booleanQueNoRetornaBoolean());
+	Print("El resultado de la función String que no retorna cadena es: " & cadenaQueNoRetornaCadena());
 	Print("Fibonacci de 0 es: " & fibonacci(0));
 	Print("Fibonacci de 1 es: " & fibonacci(1));
 	Print("Fibonacci de 2 es: " & fibonacci(2));
@@ -39,11 +43,33 @@ Function Void main(){
 	Print("Factorial de 5 es: " & factorial2(5));
 	imprimirSet(10);
 	imprimirSet2(5);
-	concatenar ("Hola", "Mundo");
+	Print("El valor de la cadena concatenada es: " & concatenar ("Hola", "Mundo"));
 	Print("Esto es el final de la prueba");
 	Declare Number variableEnMain;
 	variableEnMain=10;
 	imprimirVariableEnMain();
+	Declare Number d[15][True];
+	c["Hola mundo"][0]=100;
+	a=c["Cadena"][0];
+	Declare Number e;
+	e="Hola mundo";
+}
+
+Function Void voidQueRetornaValor(){
+	return 999;
+	Print("Esto no debería imprimirse porque está después del return");
+}
+
+Function Number numberQueNoRetornaNumber(){
+	return "Texto que no es número";
+}
+
+Function Boolean booleanQueNoRetornaBoolean(){
+	return "Texto que no es un booleano";
+}
+
+Function String cadenaQueNoRetornaCadena(){
+	return True;
 }
 
 Function Void imprimirVariableEnMain(){
@@ -131,7 +157,7 @@ Function Number fibonacci (Number n)
 	}
 }
 
-Function Void concatenar (String a, String b)
+Function String concatenar (String a, String b)
 {
-	Print("La cadena concatenada es: " & a & " " & b);
+	return a & " " & b;
 }

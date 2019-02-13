@@ -39,6 +39,11 @@ public class DeclaracionArreglo extends Declaracion implements Instruccion{
         LinkedList<Integer> tamaniosDimensiones=new LinkedList<>();
         for (Instruccion dim : dimensiones) {
             Object er=dim.ejecutar(ts, ar);
+            //Se comprueba que cada indice para declarar un arreglo sea de tipo numerico
+            if(!(er instanceof Double)){
+                System.err.println("Los indices para declarar un arreglo deben ser de tipo numérico. El indice ["+String.valueOf(er)+"] no es numérico.");
+                return null;
+            }
             tamaniosDimensiones.add(((Double)er).intValue());
         }
         ts.add(new Simbolo(id,tipo,tamaniosDimensiones));

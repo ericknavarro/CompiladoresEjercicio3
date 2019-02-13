@@ -64,7 +64,8 @@ public class Function implements Instruccion {
      * @param c Lista de instrucciones contenidas por la función
      */
     public Function(String a, String b, LinkedList<Instruccion> c) {
-        switch (a.toLowerCase()) {
+        String reservadaTipo=a.toLowerCase();
+        switch (reservadaTipo) {
             case "number": tipo=Simbolo.Tipo.NUMERO;
                      break;
             case "string":  tipo=Simbolo.Tipo.CADENA;
@@ -109,11 +110,7 @@ public class Function implements Instruccion {
                 Object r;
                 r=ins.ejecutar(tablaLocal,ar);
                 if(r!=null){
-                    if(r instanceof Return){
-                        return null;
-                    }else{
-                        return r;
-                    }
+                    return r;
                 }
             }            
         }else{
@@ -126,7 +123,19 @@ public class Function implements Instruccion {
      * @return Identificador de la función
      */
     public String getIdentificador() {
-        return identificador.toLowerCase();
+
+        // se crea un identificador único de las funciones con base en su Id 
+        // más el tipo de sus parametros de la forma _id(_tipo..._tipo)
+
+        String id = "_" + identificador + "(";
+        if (parametros != null) {
+            for (Declaracion parametro: parametros) {
+                id += "_" + parametro.tipo.name();
+            }
+        }
+        id += ")";
+        
+        return id.toLowerCase();
     }
     /**
      * Método que configura el set de parámetros que la función debe recibir
@@ -134,6 +143,13 @@ public class Function implements Instruccion {
      */
     public void setValoresParametros(LinkedList<Instruccion> a) {
         valoresParametros=a;
+    }
+    /**
+     * Método que devuelve el tipo de la función
+     * @return Tipo de la función
+     */
+    public Simbolo.Tipo getTipo() {
+        return tipo;
     }
     
 }

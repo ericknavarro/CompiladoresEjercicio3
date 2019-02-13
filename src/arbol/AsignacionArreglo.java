@@ -40,6 +40,11 @@ public class AsignacionArreglo extends Asignacion implements Instruccion{
         LinkedList<Integer> valoresIndices=new LinkedList<>();
         for (Instruccion dim : indices) {
             Object er=dim.ejecutar(ts, ar);
+            //Se comprueba que cada indice para asignar un valor al arreglo sea de tipo numerico
+            if(!(er instanceof Double)){
+                System.err.println("Los indices para asignar un valor a un arreglo deben ser de tipo numérico. El indice ["+String.valueOf(er)+"] no es numérico.");
+                return null;
+            }
             valoresIndices.add(((Double)er).intValue());
         }
         ts.setValor(id,valor.ejecutar(ts,ar),valoresIndices);
