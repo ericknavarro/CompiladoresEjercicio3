@@ -110,6 +110,10 @@ public class Function implements Instruccion {
                 Object r;
                 r=ins.ejecutar(tablaLocal,ar);
                 if(r!=null){
+                    if(r instanceof Break){
+                        System.err.println("La sentencia break no se encuentra dentro de un ciclo");
+                        return null;
+                    }
                     return r;
                 }
             }            
