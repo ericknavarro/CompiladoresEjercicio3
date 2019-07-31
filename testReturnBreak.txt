@@ -1,0 +1,61 @@
+/******************************************
+ * Archivo para testear los retornos y break *
+ ******************************************/
+ 
+Declare Number a;
+Declare Number b;
+
+Function Void main(){
+    retornarNadaFuncionVoid(); // sin error
+    retornarValorFuncionVoid(); // error porque no permite retorno con valores
+	funcionConbreakSinCiclo(2); // Debe imprimir error, porque el break no esta dentro de un ciclo
+	funcionConbreakConCiclo(2); // Ejecuta todo correcto
+	funcionRetornoSinValor(2); // Debe imprimir error, porque el retorno necesita un valor
+	print(funcionRetornoConValor(2)); // imprime y Ejecuta sin errores
+    ProbarFaltaReturns(9);
+    ProbarFaltaReturns(2);
+}
+
+function void funcionConbreakSinCiclo(number c){
+    if(c < 9){
+        break;
+    }
+}
+
+function void funcionConbreakConCiclo(number c){
+    while(c<9){
+       if(c < 9){
+            break;
+        } 
+        c = c + 1;
+    }
+    declare number i;
+    For(i=1;i<c;i=i+1){
+		break;
+	}
+}
+
+function number funcionRetornoSinValor(number c){
+    return;
+}
+
+function number funcionRetornoConValor(number c){
+    return c;
+}
+
+function number ProbarFaltaReturns(number g){
+    if(g < 4){
+        // Deberia retornar bien en este punto
+        return g;
+    }
+    // si no cumple el if deberia indicar error: hace falta return
+}
+
+function void retornarValorFuncionVoid(){
+    return 9;
+}
+
+function void retornarNadaFuncionVoid(){
+    return;
+}
+

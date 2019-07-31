@@ -66,6 +66,12 @@ public class LlamadaFuncion implements Instruccion{
             if(f.getTipo()==Simbolo.Tipo.VOID && !(rFuncion instanceof Return || rFuncion == null)){
                 System.err.println("Una función de tipo Void no puede retornar valores, solamente puede retornar vacío.");
                 return null;
+            } else if (f.getTipo() != Simbolo.Tipo.VOID && rFuncion instanceof Return) {
+                System.err.println("La funcion necesita un valor de retorno");
+                return null;
+            } else if (f.getTipo() != Simbolo.Tipo.VOID && rFuncion == null) {
+                System.err.println("Hace falta una sentencia de retorno en la función");
+                return null;
             }else if(f.getTipo()==Simbolo.Tipo.NUMERO && !(rFuncion instanceof Double)){
                 System.err.println("Una función de tipo Number no puede retornar un valor que no sea numérico.");
                 return null;
