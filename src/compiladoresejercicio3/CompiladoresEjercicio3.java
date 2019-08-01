@@ -19,7 +19,9 @@ public class CompiladoresEjercicio3 {
      * @param args argumentos de la linea de comando
      */
     public static void main(String[] args) {
-        interpretar("testReturnBreak.txt");
+        //La siguiente entrada comentada sirvió para validar las modificaciones hechas en el pull request 28.
+        //interpretar("testReturnBreak.txt");
+        interpretar("entrada.txt");
     }
     /**
      * Método que lee el contenido de un archivo de texto y ejecuta las 
