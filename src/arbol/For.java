@@ -53,7 +53,6 @@ public class For implements Instruccion{
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
         inicializador.ejecutar(ts,ar);
         while((Boolean)condicion.ejecutar(ts,ar)){
-            incrementador.ejecutar(ts,ar);
             TablaDeSimbolos tablaLocal=new TablaDeSimbolos();
             tablaLocal.addAll(ts);
             for(Instruccion ins:listaInstrucciones){
@@ -67,6 +66,7 @@ public class For implements Instruccion{
                     }
                 }
             }
+            incrementador.ejecutar(ts,ar);
         }
         return null;
     }   

@@ -24,11 +24,16 @@ public class Declaracion implements Instruccion{
      */
     protected final Simbolo.Tipo tipo;
     /**
+     * Valor de la variable que será declarada.
+     */
+    protected final Instruccion valor;
+    /**
      * Constructor de la clase
      * @param a Identificador de la variable que será declarada
      * @param b Tipo de la clase que será declarada
+     * @param c Valor que se sera asignado a la variable
      */
-    public Declaracion(String a, String b) {
+    public Declaracion(String a, String b, Instruccion c) {
         id=a;
         String reservadaTipo=b.toLowerCase();
         switch (reservadaTipo) {
@@ -42,6 +47,7 @@ public class Declaracion implements Instruccion{
                 tipo=null;
         }
         parametro=false;
+        this.valor = c;
     }
     /**
      * Método que ejecuta la accion de declarar una variable, es una sobreescritura del 
@@ -54,6 +60,14 @@ public class Declaracion implements Instruccion{
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
         Simbolo aux=new Simbolo(id,tipo);
         aux.setParametro(this.parametro);
+        boolean asignacionCorrecta = false;
+        if(valor != null){
+            Object val = valor.ejecutar(ts, ar);
+            asignacionCorrecta = aux.setValor(val);
+            if(asignacionCorrecta)
+                ts.add(aux);
+            return null;
+        }
         ts.add(aux);
         return null;
     }

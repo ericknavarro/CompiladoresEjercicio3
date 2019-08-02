@@ -5,6 +5,7 @@
  */
 package arbol;
 
+import arbol.Simbolo.Tipo;
 import java.util.LinkedList;
 
 /**
@@ -21,12 +22,13 @@ public class NodoArreglo {
      * Valor que alberga esta celda del arreglo.
      */
     private Object valor;
+    private Tipo tipo;
     /**
      * Constructor para crear una celda de arreglo vacía
      */
     public NodoArreglo() {
         this.celdasVecinas = new LinkedList<>();
-        this.valor = null;
+        this.valor = new Nulo(); //Inicializando cada celda con objeto Nulo
     }
     /**
      * Método que inicializa todas las celdas de un arreglo, esta inicialización
@@ -42,6 +44,7 @@ public class NodoArreglo {
         }
         for (int i = 0; i < tamaniosDimensiones.get(dimensionActual-1) ; i++) {
             NodoArreglo arr=new NodoArreglo();
+            arr.setTipo(tipo);
             celdasVecinas.add(arr);
             arr.inicializarNodo(cantDimensiones, dimensionActual+1, tamaniosDimensiones);            
         }
@@ -59,6 +62,13 @@ public class NodoArreglo {
         if(valIndiceActual<celdasVecinas.size() && valIndiceActual>=0){
             NodoArreglo arr=celdasVecinas.get(valIndiceActual);
             if(indiceActual==cantIndices){
+                // Validar que el valor a insertar sea del mismo tipo del arreglo
+                if(val instanceof Double && tipo != Tipo.NUMERO 
+                        || val instanceof Boolean && tipo != Tipo.BOOLEANO
+                        || val instanceof String && tipo != Tipo.CADENA){
+                    System.err.println("Esta intentando insertar un valor de tipo "+val.getClass().getSimpleName()+" al arreglo de tipo "+tipo);
+                    return;
+                }
                 arr.valor=val;
             }else{
                 arr.setValor(cantIndices, indiceActual+1, indices, val, id);
@@ -83,7 +93,8 @@ public class NodoArreglo {
         if(valIndiceActual<celdasVecinas.size() && valIndiceActual>=0){
             NodoArreglo arr=celdasVecinas.get(valIndiceActual);
             if(indiceActual==cantIndices){
-                return arr.valor;
+                Object val = arr.valor;
+                return val == null ? new Nulo() : val;
             }else{
                 return arr.getValor(cantIndices, indiceActual+1, indices, id);
             }
@@ -93,5 +104,14 @@ public class NodoArreglo {
                     + "los límites del arreglo.");
         }
         return null;
+    }
+    public Tipo getTipo() {
+        return tipo;
+    }
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+    public LinkedList<NodoArreglo> getCeldasVecinas() {
+        return celdasVecinas;
     }
 }

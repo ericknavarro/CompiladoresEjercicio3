@@ -1,0 +1,90 @@
+/******************************************
+    Acontinuacion se prueba
+     * Declaraciones con asignaciones 
+        ej. 
+            declare number a = 4;
+     * Asignaciones de arreglos con arreglos
+        ej.
+            declare number a[3][2];
+            declare number b[3][2];
+            a = b;
+     * Retorno de arreglo sin valores asignados
+        ej. 
+            declare number a[3][2];
+            return a[0][0];
+     * Asignaciones erroneas entre arreglos y variables simples
+     *** Recordar que enviar arreglos como parametros no funciona
+     *** Tampoco funciona enviar accesos a arreglos como parametro
+     *** Tampoco funciona retornar arreglos
+ ******************************************/
+
+Declare string varGlobal = "variableGlobal";
+
+Function Void main(){
+    print(varGlobal);
+	Declaraciones();
+    ArraysIguales();
+    ArraysDiferentes();
+    ArraysYvariablesSimples();
+    print("Resultado de imprimir una posicion SIN valor ->"&returnNull());
+    print("Resultado de imprimir una posicion CON valor ->"&returnNoNull());
+    print("Deberian haber 5 errores con este ejemplo a menos que se cambie");
+}
+
+function void Declaraciones(){
+    Declare string arbol1 = "Declarando la variable y asignando su valor";
+    print(arbol1);
+
+    arbol1 = "Comprobando que existe la variable y reasignando su valor";
+    print(arbol1);
+}
+
+function void ArraysIguales(){
+    Declare number a[3][6][9][2];
+    Declare number b[3][6][9][2];
+
+    a[0][0][0][0] = 199;
+    b[0][0][0][0] = 17;
+    print("b en la posicion [0][0][0][0] es: "&b[0][0][0][0]);
+    print("a en la posicion [0][0][0][0] es: "&a[0][0][0][0]);
+    b = a;
+    print("Reasignando el valor de b, b = a por lo tanto ahora b tiene los valores de a. b en la posicion [0][0][0][0] es: "&b[0][0][0][0]);
+}
+
+function void ArraysDiferentes(){
+    Declare number a[3][6][9][2];
+    Declare number b[3][6][2][2];
+    Declare string c[3][6][2][2];
+    Declare number d[3];
+
+    a = b;// ERROR 1
+    print("asignando a = b, Lo que da error aunque ambos tienen 4 dimensiones el tamaño de estas no coincide"); 
+
+    b = c;// ERROR 2
+    print("asignando b = c, Lo que da error aunque ambos tienen 4 dimensiones y los tamaños coinciden los tipos NO"); 
+
+    c = d;// ERROR 3
+    print("asignando c = d, Da error porque son distintas dimensiones");
+}
+
+function void ArraysYvariablesSimples(){
+    Declare number alpha[3];
+    Declare number beta = 6;
+
+    alpha = beta;// ERROR 4
+    print("asignando alpha(arreglo) = beta(variableSimple) lo que da error porque no coinciden");
+
+    beta = alpha;// ERROR 5
+    print("asignando beta(variableSimple) = alpha(arreglo) lo que da error porque no coinciden");
+}
+
+function number returnNull(){
+    Declare number pi[3][14];
+    return pi[0][0];
+}
+
+function number returnNoNull(){
+    Declare number pi[3][14];
+    pi[0][0] = 0;
+    return pi[0][0];
+}

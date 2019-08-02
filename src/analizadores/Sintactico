@@ -76,7 +76,7 @@ non terminal Instruccion instruccion;
 non terminal LinkedList<Instruccion> instrucciones_sup;
 non terminal Instruccion instruccion_sup;
 non terminal LinkedList<Declaracion> parametros;
-non terminal Declaracion declaracion;
+non terminal Declaracion declaracion, declaracionAsignacion;
 non terminal Instruccion expresion;
 non terminal String tipo;
 non terminal String tipo_funcion;
@@ -120,6 +120,7 @@ instruccion_sup ::=
    RFUNCTION tipo_funcion:a IDENTIFICADOR:b PARIZQ parametros:c PARDER LLAVIZQ instrucciones:d LLAVDER {:RESULT=new Function(a,b,c,d);:}
  | RFUNCTION tipo_funcion:a IDENTIFICADOR:b PARIZQ PARDER LLAVIZQ instrucciones:c LLAVDER {:RESULT=new Function(a,b,c);:}
  | RDECLARE declaracion:a PTCOMA {:RESULT=a;:}
+ | RDECLARE declaracionAsignacion:a PTCOMA {:RESULT=a;:}
  | error
 ;
 
@@ -147,6 +148,7 @@ instrucciones ::=
 instruccion ::= 
    RPRINT PARIZQ expresion:a PARDER PTCOMA  {:RESULT=new Imprimir(a);:}
  | RDECLARE declaracion:a PTCOMA {:RESULT=a;:}
+ | RDECLARE declaracionAsignacion:a PTCOMA {:RESULT=a;:}
  | IDENTIFICADOR:a IGUAL expresion:b PTCOMA {:RESULT=new Asignacion(a,b);:}
  | IDENTIFICADOR:a dimensiones:c IGUAL expresion:b PTCOMA {:RESULT=new AsignacionArreglo(a,b,c);:}
  | instruccion_if_sup:a  {:RESULT=a;:}
@@ -162,8 +164,12 @@ instruccion ::=
 ;
 
 declaracion ::= 
-   tipo:a IDENTIFICADOR:b {:RESULT=new Declaracion(b,a);:}
+   tipo:a IDENTIFICADOR:b {:RESULT=new Declaracion(b,a,null);:}
  | tipo:a IDENTIFICADOR:b dimensiones:c {:RESULT=new DeclaracionArreglo(b,a,c);:}
+;
+
+declaracionAsignacion ::= 
+  tipo:a IDENTIFICADOR:b IGUAL expresion:c {:RESULT=new Declaracion(b,a,c);:}
 ;
 
 tipo ::= 

@@ -244,6 +244,8 @@ public class Operacion implements Instruccion {
         } else if (tipo == Tipo_operacion.FALSE) {
             return new Boolean(false);
         } else if (tipo == Tipo_operacion.CONCATENACION) {
+            a = a instanceof Nulo ? "nulo" : a;
+            b = b instanceof Nulo ? "nulo" : b;
             return ((a == null) ? null : a.toString()) + ((b == null) ? null : b.toString());
         } else {
             return null;

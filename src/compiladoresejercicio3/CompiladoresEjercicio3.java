@@ -21,6 +21,7 @@ public class CompiladoresEjercicio3 {
     public static void main(String[] args) {
         //La siguiente entrada comentada sirvió para validar las modificaciones hechas en el pull request 28.
         //interpretar("testReturnBreak.txt");
+        //interpretar("testDeclaracionAsignacion.txt");
         interpretar("entrada.txt");
     }
     /**

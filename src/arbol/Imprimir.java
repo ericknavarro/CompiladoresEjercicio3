@@ -35,7 +35,7 @@ public class Imprimir implements Instruccion{
     public Object ejecutar(TablaDeSimbolos ts,Arbol ar) {
         Object rImprimir=contenido.ejecutar(ts,ar);//Variable que almacena el resultado de la expresión que se desea imprimir
         if(rImprimir != null){
-            System.out.println(String.valueOf(rImprimir));
+            System.out.println(rImprimir instanceof Nulo ? "nulo" : String.valueOf(rImprimir));
         }
         return null;
     }

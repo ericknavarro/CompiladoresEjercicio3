@@ -63,7 +63,9 @@ public class LlamadaFuncion implements Instruccion{
         if(null!=f){
             f.setValoresParametros(parametros);
             Object rFuncion=f.ejecutar(ts, ar); //Objeto que almacena el resultado de la ejecución del proceso
-            if(f.getTipo()==Simbolo.Tipo.VOID && !(rFuncion instanceof Return || rFuncion == null)){
+            if(rFuncion instanceof Nulo){
+                return rFuncion;
+            }else if(f.getTipo()==Simbolo.Tipo.VOID && !(rFuncion instanceof Return || rFuncion == null)){
                 System.err.println("Una función de tipo Void no puede retornar valores, solamente puede retornar vacío.");
                 return null;
             } else if (f.getTipo() != Simbolo.Tipo.VOID && rFuncion instanceof Return) {

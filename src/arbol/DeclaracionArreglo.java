@@ -24,7 +24,7 @@ public class DeclaracionArreglo extends Declaracion implements Instruccion{
      * @param c Dimensiones del arreglo
      */
     public DeclaracionArreglo(String a, String b, LinkedList<Instruccion> c) {
-        super(a,b);
+        super(a,b,null);
         dimensiones=c;
     }
     /**

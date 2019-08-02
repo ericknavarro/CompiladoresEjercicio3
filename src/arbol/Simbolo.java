@@ -63,6 +63,7 @@ public class Simbolo {
         this.id = id;
         this.tamaniosDimensiones = td;
         NodoArreglo arr=new NodoArreglo();
+        arr.setTipo(tipo);
         arr.inicializarNodo(tamaniosDimensiones.size(), 1, tamaniosDimensiones);
         this.valor=arr;
     }
@@ -83,10 +84,12 @@ public class Simbolo {
     /**
      * Método que asigna un nuevo valor a la variable.
      * @param v Nuevo valor para la variable.
+     * @return retorno indica si se asigno de forma correcta la variable
      */
-    void setValor(Object v) {
+    boolean setValor(Object v) {
         //Variable que alberga el tipo del valor a asignar
         Tipo vTipo=null;
+        boolean retorno = false;
         if (v instanceof Double) {
             vTipo = Simbolo.Tipo.NUMERO;
         } else if(v instanceof String) {
@@ -94,12 +97,44 @@ public class Simbolo {
         } else if(v instanceof Boolean){
             vTipo = Simbolo.Tipo.BOOLEANO;
         }
-        //¿Es el valor a asignar igual al tipo de la variable a la que se le va a asignar el valor?
-        if(vTipo == tipo){
-            valor=v;
+        if(v instanceof NodoArreglo && valor instanceof NodoArreglo){// se va asignar un arreglo a una variable arreglo 
+            // If nuevo que valida que se asignara un arreglo a otro -> arreglo1 = arreglo2
+                NodoArreglo arregloNuevo = (NodoArreglo) v;
+                NodoArreglo arregloActual = (NodoArreglo) this.valor;
+                vTipo = arregloNuevo.getTipo();
+                // verificar tamaño de las dimensiones de cada arreglo
+                if(verificarDimensionesArreglo(arregloActual, arregloNuevo)){
+                    if(vTipo == tipo){
+                        valor=v;
+                        retorno = true;
+                    }else{
+                        System.err.println("Esta intentando asignar un arreglo de "
+                            + "tipo " + arregloNuevo.getTipo()
+                            + " a un arreglo ["+id+"] de tipo " + arregloActual.getTipo());
+                    }
+                }else{
+                    System.err.println("Las dimensiones del arreglo a asignar no"
+                            + " coinciden con las dimensiones del arreglo ["+id+"]");
+                }
+        }else if(!(v instanceof NodoArreglo) && !(valor instanceof NodoArreglo)){
+            //Esto ya existia, solamente se movio a este if que valida la asignacion de variableSimple1 = variableSimple2
+            //¿Es el valor a asignar igual al tipo de la variable a la que se le va a asignar el valor?
+            if(vTipo == tipo){
+                valor=v;
+                retorno = true;
+            }else{
+                System.err.println("Esta intentando asignar un valor de tipo ["+(vTipo==null?"null":vTipo.name())+"] a la variable ["+id+"] de tipo ["+tipo.name()+ "], esto no está permitido.");
+            }
         }else{
-            System.err.println("Esta intentando asignar un valor de tipo ["+(vTipo==null?"null":vTipo.name())+"] a la variable ["+id+"] de tipo ["+tipo.name()+ "], esto no está permitido.");
+            // Si se llega a este caso ambos son errores ya que asigna 
+            // VariableSimple = Arreglo y Arreglo = VariableSimple lo cual no se puede
+            if(!(v instanceof NodoArreglo) && valor instanceof NodoArreglo){
+                System.err.println("Esta intentando asignar un valor de tipo ["+(vTipo==null?"null":vTipo.name())+"] a la variable [Arreglo "+id+"] de tipo ["+tipo.name()+ "], esto no está permitido.");
+            }else{
+                System.err.println("Esta intentando asignar un valor de tipo [Arreglo] a la variable ["+id+"] de tipo ["+tipo.name()+ "], esto no está permitido.");
+            }
         }
+        return retorno;
     }
     /**
      * Método que setea un valor en cierta celda de un arreglo.
@@ -112,7 +147,7 @@ public class Simbolo {
                 NodoArreglo arr=(NodoArreglo)this.valor;
                 arr.setValor(indices.size(), 1, indices, val, id);
             }else{
-                System.out.println("La cantidad de indices indicados no "
+                System.err.println("La cantidad de indices indicados no "
                         + "coincide con la cantidad de dimensiones del arreglo "+id+", no puede asignársele un valor.");            
             }
         }else{
@@ -141,6 +176,20 @@ public class Simbolo {
         }
         return null;
     }
+    
+    boolean verificarDimensionesArreglo(NodoArreglo Actual, NodoArreglo Nuevo){
+        LinkedList<NodoArreglo> arregloActual = Actual.getCeldasVecinas();
+        LinkedList<NodoArreglo> arregloNuevo = Nuevo.getCeldasVecinas();
+        if(arregloActual.size() == arregloNuevo.size()){
+            if(arregloActual.size() == 0){
+                return true;
+            }else{
+                return verificarDimensionesArreglo(arregloActual.get(0), arregloNuevo.get(0));
+            }
+        }
+        return false;
+    }
+    
     /**
      * Enumeración que lista todos los tipos de variable reconocidos en el lenguaje.
      */
