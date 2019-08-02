@@ -16,6 +16,7 @@
      *** Recordar que enviar arreglos como parametros no funciona
      *** Tampoco funciona enviar accesos a arreglos como parametro
      *** Tampoco funciona retornar arreglos
+     *** revisar cuando se manda a imprimir un arreglo
  ******************************************/
 
 Declare string varGlobal = "variableGlobal";
@@ -28,7 +29,8 @@ Function Void main(){
     ArraysYvariablesSimples();
     print("Resultado de imprimir una posicion SIN valor ->"&returnNull());
     print("Resultado de imprimir una posicion CON valor ->"&returnNoNull());
-    print("Deberian haber 5 errores con este ejemplo a menos que se cambie");
+    print("Deberian haber 6 errores con este ejemplo a menos que se cambie");
+    tiposDistintos();
 }
 
 function void Declaraciones(){
@@ -87,4 +89,11 @@ function number returnNoNull(){
     Declare number pi[3][14];
     pi[0][0] = 0;
     return pi[0][0];
+}
+
+function void tiposDistintos(){
+    Declare number pi[2][2];
+    pi[0][0] = true; // ERROR 6
+    pi[0][0] = 4; 
+    print(pi[0][0]);
 }
